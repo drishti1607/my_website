@@ -85,7 +85,7 @@ params:
       - image: pic02.jpg
         subtitle: Read about my experiences
         title: Resume
-        url: blogs/tempus
+        url: blogs/resume.html
       - image: pic03.jpg
         subtitle: Analysis of the Leave Share % and Electoral Results 
         title: Brexit Analysis
