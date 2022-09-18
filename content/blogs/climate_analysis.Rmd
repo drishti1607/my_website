@@ -4,7 +4,7 @@ author: "Drishti Hoskote"
 date: "2022-09-18"
 output: html_document
 slug: climate_analysis
-image: pic04.jpg
+image: pic05.jpg
 title: Anomalies in Weather Patterns
 ---
 

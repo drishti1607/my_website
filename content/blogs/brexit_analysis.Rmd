@@ -4,7 +4,7 @@ author: "Drishti Hoskote"
 date: "2022-09-18"
 output: html_document
 slug: brexit_analysis
-image: pic03.jpg
+image: pic05.jpg
 title: Brexit Vote Analysis
 ---
 
