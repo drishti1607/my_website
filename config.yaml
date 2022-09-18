@@ -81,21 +81,21 @@ params:
     enable: yes
     showcase:
       - image: IMG_2059.JPG
-        subtitle: Ipsum Dolor Sit Amet
+        subtitle: Get to know me better!
         title: About Me
-        url: blogs/aliquam
+        url: blogs/about_me
       - image: pic02.jpg
-        subtitle: Feugiat Amet Tempus
-        title: Read my CV
+        subtitle: Read about my experiences
+        title: Resume
         url: blogs/tempus
       - image: pic03.jpg
-        subtitle: Lorem Etiam Nullam
+        subtitle: Analysis of the Leave Share % and Electoral Results 
         title: Brexit Analysis
-        url: blogs/magna
+        url: blogs/brexit_analysis
       - image: pic04.jpg
         subtitle: Nisl Sed Aliquam
         title: Climate and Temperature Change Analysis
-        url: blogs/ipsum
+        url: blogs/climate_analysis
       - image: pic05.jpg
         subtitle: Ipsum Dolor Sit Amet
         title: Analysis of Rents in the Bay Area

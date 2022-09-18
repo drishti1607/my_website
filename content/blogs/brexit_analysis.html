@@ -1,0 +1,58 @@
+---
+title: "Brexit Analysis"
+author: "Drishti Hoskote"
+date: "2022-09-18"
+output: html_document
+---
+
+
+
+<div id="analysis-of-brexit-votes-in-2016-and-electoral-of-parties-in-the-2015-general-elections" class="section level1">
+<h1>Analysis of Brexit votes in 2016 and electoral % of parties in the 2015 general elections</h1>
+<div id="reading-the-data" class="section level2">
+<h2>Reading the data</h2>
+<pre class="r"><code>brexit_results &lt;- read_csv(&quot;https://raw.githubusercontent.com/kostis-christodoulou/am01/master/data/brexit_results.csv&quot;)</code></pre>
+</div>
+<div id="plotting-the-information" class="section level2">
+<h2>Plotting the Information</h2>
+<pre class="r"><code>brexit_results_long &lt;- pivot_longer(brexit_results, 
+                                    col = c(&quot;con_2015&quot;, &quot;lab_2015&quot;,&quot;ld_2015&quot;, &quot;ukip_2015&quot;), 
+                                    names_to = &quot;party&quot;, 
+                                    values_to = &quot;party_percentage&quot;) %&gt;%
+  summarize(Seat, party, party_percentage, leave_share)
+brexit_results_long</code></pre>
+<pre><code>## # A tibble: 2,528 × 4
+##    Seat                     party     party_percentage leave_share
+##    &lt;chr&gt;                    &lt;chr&gt;                &lt;dbl&gt;       &lt;dbl&gt;
+##  1 Aldershot                con_2015             50.6         57.9
+##  2 Aldershot                lab_2015             18.3         57.9
+##  3 Aldershot                ld_2015               8.82        57.9
+##  4 Aldershot                ukip_2015            17.9         57.9
+##  5 Aldridge-Brownhills      con_2015             52.0         67.8
+##  6 Aldridge-Brownhills      lab_2015             22.4         67.8
+##  7 Aldridge-Brownhills      ld_2015               3.37        67.8
+##  8 Aldridge-Brownhills      ukip_2015            19.6         67.8
+##  9 Altrincham and Sale West con_2015             53.0         38.6
+## 10 Altrincham and Sale West lab_2015             26.7         38.6
+## # … with 2,518 more rows</code></pre>
+<pre class="r"><code>party_colours = c(&quot;#0087DC&quot;, &quot;#E4003B&quot;, &quot;#FAA61A&quot;, &quot;#FFD700&quot;)
+parties = c(&quot;Conservaltive&quot;, &quot;Labour&quot;, &quot;Lib Dems&quot;, &quot;UKIP&quot;)
+
+g &lt;- ggplot(brexit_results_long, aes(x = party_percentage, y = leave_share, colour = party)) +
+  geom_point(size = 0.3) +
+  geom_smooth(method = lm) +
+  scale_colour_manual(labels = parties, values = party_colours) +
+  labs(
+    title = &quot;How political affiliation translated to Brexit voting&quot;
+  ) + 
+  ylab(&quot;Leave % in the 2016 Brexit referendum&quot;) +
+  xlab(&quot;Party % in the UK 2015 general election&quot;) +
+  theme(legend.position = &quot;bottom&quot;) +
+  theme(legend.title=element_blank())
+g</code></pre>
+<p><img src="/blogs/brexit_analysis_files/figure-html/brexit-1.png" width="648" style="display: block; margin: auto;" /></p>
+<blockquote>
+<p>Looking at this graph, we can see that there is a moderate negative correlation between LibDem percentage and voting for Brexit. On the other hand, what stands out, is a high correlation between the UKIP percentage and voting for Brexit. This is not very surprising given that UKIP (UK Independence Party) was at the forefront of leading the Brexit campaign. Moreover, we can also observe a slight positive correlation between conservative % and leave %.</p>
+</blockquote>
+</div>
+</div>

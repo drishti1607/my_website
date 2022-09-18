@@ -1,0 +1,82 @@
+---
+title: "Climate Analysis"
+author: "Drishti Hoskote"
+date: "2022-09-18"
+output: html_document
+---
+
+
+
+<div id="reading-the-data" class="section level2">
+<h2>Reading the data</h2>
+<pre class="r"><code>weather &lt;- 
+  read_csv(&quot;https://data.giss.nasa.gov/gistemp/tabledata_v4/NH.Ts+dSST.csv&quot;, 
+           skip = 1, 
+           na = &quot;***&quot;)</code></pre>
+</div>
+<div id="plotting-the-information" class="section level2">
+<h2>Plotting the Information</h2>
+<pre class="r"><code>#to select year and 12 months
+year_months &lt;- weather %&gt;%
+  select(1:13)
+#year_months
+
+#converting to long format
+tidyweather &lt;- year_months %&gt;%
+  pivot_longer(2:13, names_to = &quot;Month&quot;, values_to = &quot;delta&quot;)
+#tidyweather</code></pre>
+<div id="weather-anomalies-for-each-month" class="section level3">
+<h3>Weather anomalies for each month</h3>
+<pre class="r"><code>tidyweather &lt;- tidyweather %&gt;%
+  mutate(date = ymd(paste(as.character(Year), Month, &quot;1&quot;)),
+         month = month(date, label=TRUE),
+         year = year(date))
+tidyweather</code></pre>
+<pre><code>## # A tibble: 1,716 × 6
+##     Year Month delta date       month  year
+##    &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;date&gt;     &lt;ord&gt; &lt;dbl&gt;
+##  1  1880 Jan   -0.39 1880-01-01 Jan    1880
+##  2  1880 Feb   -0.53 1880-02-01 Feb    1880
+##  3  1880 Mar   -0.23 1880-03-01 Mar    1880
+##  4  1880 Apr   -0.3  1880-04-01 Apr    1880
+##  5  1880 May   -0.05 1880-05-01 May    1880
+##  6  1880 Jun   -0.18 1880-06-01 Jun    1880
+##  7  1880 Jul   -0.21 1880-07-01 Jul    1880
+##  8  1880 Aug   -0.25 1880-08-01 Aug    1880
+##  9  1880 Sep   -0.24 1880-09-01 Sep    1880
+## 10  1880 Oct   -0.3  1880-10-01 Oct    1880
+## # … with 1,706 more rows</code></pre>
+<pre class="r"><code>g &lt;- ggplot(tidyweather, aes(x=date, y = delta))+
+    geom_point()+
+    geom_smooth(color=&quot;red&quot;) +
+    theme_bw() +
+    labs (
+      title = &quot;Weather Anomalies&quot;
+    ) + facet_wrap(vars(month(date, label=TRUE)))
+g</code></pre>
+<p><img src="/blogs/climate_analysis_files/figure-html/scatter_plot-1.png" width="648" style="display: block; margin: auto;" /></p>
+<blockquote>
+<p>Weather anomalies have an increasing trend, with a steap increase after 1975. The effect of increasing temperature is slightly more pronounced in November.</p>
+</blockquote>
+</div>
+<div id="weather-anomalies-for-different-time-periods" class="section level3">
+<h3>Weather anomalies for different time periods</h3>
+<p>Grouping data in five time periods:</p>
+<pre class="r"><code>comparison &lt;- tidyweather %&gt;% 
+  filter(Year&gt;= 1881) %&gt;%     #remove years prior to 1881
+  #create new variable &#39;interval&#39;, and assign values based on criteria below:
+  mutate(interval = case_when(
+    Year %in% c(1881:1920) ~ &quot;1881-1920&quot;,
+    Year %in% c(1921:1950) ~ &quot;1921-1950&quot;,
+    Year %in% c(1951:1980) ~ &quot;1951-1980&quot;,
+    Year %in% c(1981:2010) ~ &quot;1981-2010&quot;,
+    TRUE ~ &quot;2011-present&quot;
+  ))</code></pre>
+</div>
+<div id="the-distribution-of-monthly-deviations-delta-grouped-by-the-different-time-periods" class="section level3">
+<h3>The distribution of monthly deviations (<code>delta</code>), grouped by the different time periods:</h3>
+<pre class="r"><code>g &lt;- ggplot(comparison, aes(delta, fill = interval)) + 
+  geom_density()
+g</code></pre>
+</div>
+</div>

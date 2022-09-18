@@ -1,0 +1,72 @@
+---
+title: "Brexit Analysis"
+author: "Drishti Hoskote"
+date: "2022-09-18"
+output: html_document
+---
+
+```{r, setup, echo=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE, 
+  tidy=FALSE,     # display code as typed
+  size="small")   # slightly smaller font for code
+options(digits = 3)
+
+# default figure size
+knitr::opts_chunk$set(
+  fig.width=6.75, 
+  fig.height=6.75,
+  fig.align = "center"
+)
+```
+
+```{r load-libraries, echo=FALSE}
+library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
+library(mosaic)
+library(ggthemes)
+library(GGally)
+library(readxl)
+library(here)
+library(skimr)
+library(janitor)
+library(broom)
+library(tidyquant)
+library(infer)
+library(openintro)
+```
+
+# Analysis of Brexit votes in 2016 and electoral % of parties in the 2015 general elections
+
+## Reading the data
+```{r}
+brexit_results <- read_csv("https://raw.githubusercontent.com/kostis-christodoulou/am01/master/data/brexit_results.csv")
+```
+
+## Plotting the Information
+```{r brexit}
+brexit_results_long <- pivot_longer(brexit_results, 
+                                    col = c("con_2015", "lab_2015","ld_2015", "ukip_2015"), 
+                                    names_to = "party", 
+                                    values_to = "party_percentage") %>%
+  summarize(Seat, party, party_percentage, leave_share)
+brexit_results_long
+
+party_colours = c("#0087DC", "#E4003B", "#FAA61A", "#FFD700")
+parties = c("Conservaltive", "Labour", "Lib Dems", "UKIP")
+
+g <- ggplot(brexit_results_long, aes(x = party_percentage, y = leave_share, colour = party)) +
+  geom_point(size = 0.3) +
+  geom_smooth(method = lm) +
+  scale_colour_manual(labels = parties, values = party_colours) +
+  labs(
+    title = "How political affiliation translated to Brexit voting"
+  ) + 
+  ylab("Leave % in the 2016 Brexit referendum") +
+  xlab("Party % in the UK 2015 general election") +
+  theme(legend.position = "bottom") +
+  theme(legend.title=element_blank())
+g
+```
+
+> Looking at this graph, we can see that there is a moderate negative correlation between LibDem percentage and voting for Brexit.  On the other hand, what stands out, is a high correlation between the UKIP percentage and voting for Brexit. This is not very surprising given that UKIP (UK Independence Party) was at the forefront of leading the Brexit campaign. Moreover, we can also observe a slight positive correlation between conservative % and leave %.

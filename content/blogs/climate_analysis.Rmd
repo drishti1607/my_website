@@ -1,0 +1,108 @@
+---
+title: "Climate Analysis"
+author: "Drishti Hoskote"
+date: "2022-09-18"
+output: html_document
+---
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE, 
+  tidy=FALSE,     # display code as typed
+  size="small")   # slightly smaller font for code
+options(digits = 3)
+
+# default figure size
+knitr::opts_chunk$set(
+  fig.width=6.75, 
+  fig.height=6.75,
+  fig.align = "center"
+)
+```
+
+```{r load-libraries, include=FALSE}
+library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
+library(mosaic)
+library(ggthemes)
+library(lubridate)
+library(here)
+library(skimr)
+library(janitor)
+library(httr)
+library(readxl)
+library(vroom)
+library(wbstats)
+library(countrycode)
+library(patchwork)
+library(gganimate)
+```
+
+## Reading the data
+
+```{r weather_data, cache=TRUE}
+weather <- 
+  read_csv("https://data.giss.nasa.gov/gistemp/tabledata_v4/NH.Ts+dSST.csv", 
+           skip = 1, 
+           na = "***")
+```
+
+## Plotting the Information
+
+```{r tidyweather}
+#to select year and 12 months
+year_months <- weather %>%
+  select(1:13)
+#year_months
+
+#converting to long format
+tidyweather <- year_months %>%
+  pivot_longer(2:13, names_to = "Month", values_to = "delta")
+#tidyweather
+```
+
+### Weather anomalies for each month
+
+```{r scatter_plot}
+
+tidyweather <- tidyweather %>%
+  mutate(date = ymd(paste(as.character(Year), Month, "1")),
+         month = month(date, label=TRUE),
+         year = year(date))
+tidyweather
+
+g <- ggplot(tidyweather, aes(x=date, y = delta))+
+    geom_point()+
+    geom_smooth(color="red") +
+    theme_bw() +
+    labs (
+      title = "Weather Anomalies"
+    ) + facet_wrap(vars(month(date, label=TRUE)))
+g
+```
+
+> Weather anomalies have an increasing trend, with a steap increase after 1975. The effect of increasing temperature is slightly more pronounced in November. 
+
+### Weather anomalies for different time periods
+
+Grouping data in five time periods: 
+
+```{r intervals, eval=FALSE}
+comparison <- tidyweather %>% 
+  filter(Year>= 1881) %>%     #remove years prior to 1881
+  #create new variable 'interval', and assign values based on criteria below:
+  mutate(interval = case_when(
+    Year %in% c(1881:1920) ~ "1881-1920",
+    Year %in% c(1921:1950) ~ "1921-1950",
+    Year %in% c(1951:1980) ~ "1951-1980",
+    Year %in% c(1981:2010) ~ "1981-2010",
+    TRUE ~ "2011-present"
+  ))
+```
+
+### The distribution of monthly deviations (`delta`), grouped by the different time periods: 
+
+```{r density_plot, eval=FALSE}
+g <- ggplot(comparison, aes(delta, fill = interval)) + 
+  geom_density()
+g
+```
