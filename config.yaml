@@ -93,13 +93,13 @@ params:
         title: Brexit Analysis
         url: blogs/brexit_analysis
       - image: pic04.jpg
-        subtitle: Nisl Sed Aliquam
+        subtitle: Analysing weather anomalies
         title: Climate and Temperature Change Analysis
         url: blogs/climate_analysis
       - image: pic05.jpg
-        subtitle: Ipsum Dolor Sit Amet
-        title: Analysis of Rents in the Bay Area
-        url: blogs/ipsum
+        subtitle: Analysis of trends in rents in the Bay Area
+        title: Rents in the Bay Area
+        url: blogs/sa_rents
       - image: pic06.jpg
         subtitle: Feugiat Amet Tempus
         title: Visit the Seven Sisters with me

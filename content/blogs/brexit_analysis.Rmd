@@ -3,6 +3,7 @@ title: "Brexit Analysis"
 author: "Drishti Hoskote"
 date: "2022-09-18"
 output: html_document
+slug: brexit_analysis
 ---
 
 ```{r, setup, echo=FALSE}

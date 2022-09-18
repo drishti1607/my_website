@@ -1,0 +1,89 @@
+---
+title: "Bay Area Rents"
+author: "Drishti Hoskote"
+date: "2022-09-18"
+output: html_document
+slug: sa_rents
+---
+
+
+
+<div id="loading-the-data" class="section level2">
+<h2>Loading the data</h2>
+<pre class="r"><code># download directly off tidytuesdaygithub repo
+
+rent &lt;- readr::read_csv(&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-07-05/rent.csv&#39;, show_col_types = FALSE)</code></pre>
+</div>
+<div id="ranking-of-classifieds---top-20-cities" class="section level2">
+<h2>Ranking of Classifieds - top 20 cities</h2>
+<pre class="r"><code>df_top_twenty &lt;-
+  rent %&gt;%
+    count(city) %&gt;% #to count number of classifieds in each city
+    arrange(desc(n)) %&gt;% #arrange by highest number 
+    slice(1:20) %&gt;%
+    mutate(percentage = n/sum(n)) 
+ggplot(df_top_twenty, aes(x = percentage, y = fct_reorder(city, percentage))) + 
+  geom_col() +
+  theme_bw() + 
+  labs(
+    title = &quot;San Francisco accounts for more than a quarter of all rental classifieds&quot;,
+    subtitle = &quot;% of Craigslist listings, 2000-2018&quot;,
+    x = &quot;Rental Classifieds Percentage&quot;,
+    y = &quot;City&quot;,
+    caption = &quot;Source: Pennington. Kate (2018). Bay Area Craigslist Rental Housing Posts 2000-2018&quot;) +
+  scale_x_continuous(labels = scales::percent)</code></pre>
+<p><img src="/blogs/sa_rents_files/figure-html/top_cities-1.png" width="648" style="display: block; margin: auto;" /></p>
+</div>
+<div id="rentals-evolution-in-san-francisco" class="section level2">
+<h2>Rentals evolution in San Francisco</h2>
+<pre class="r"><code>#to find the median prices of each each year in San Fancisco
+medianPrices &lt;- rent %&gt;%
+    filter(city == &quot;san francisco&quot;, beds &lt;= 3) %&gt;%
+    group_by(beds, year) %&gt;%
+    summarize(medianYear = median(price))
+    
+ggplot(medianPrices, aes(year, medianYear, color = factor(beds))) +
+  geom_line() + 
+  facet_wrap(vars(beds), nrow = 1) +
+  theme_bw() + 
+  labs(
+    title = &quot;San Francisco rentals have been steadily increasing&quot;,
+    subtitle = &quot;0 to 3-bed listings, 2000-2018&quot;,
+     x = &quot;Year&quot;,
+    y = &quot;Rental Price&quot;,
+    caption = &quot;Source: Pennington. Kate (2018). Bay Area Craigslist Rental Housing Posts 2000-2018&quot;) +
+  theme(legend.position = &quot;None&quot;)</code></pre>
+<p><img src="/blogs/sa_rents_files/figure-html/sf_median_prices-1.png" width="648" style="display: block; margin: auto;" /></p>
+</div>
+<div id="rentals-evolution-in-the-top-12-cities" class="section level2">
+<h2>Rentals Evolution in the top 12 cities</h2>
+<pre class="r"><code>#to find the top 12 cities
+top_twelve_data &lt;- rent %&gt;%
+  count(city) %&gt;% #to count number of classifieds in each city
+  arrange(desc(n)) %&gt;%
+  slice(1:12) 
+top_twelve_cities &lt;- as.vector(top_twelve_data$city)
+#top_twelve_cities
+
+#Finding median price of each year in the top 12 cities
+rent %&gt;%
+  filter(city %in% top_twelve_cities) %&gt;%
+  group_by(year, city) %&gt;%
+  summarize(median_price = median(price)) %&gt;%
+ggplot(aes(year, median_price, color = factor(city))) +
+  geom_line() +
+  facet_wrap(vars(city)) +
+  labs(
+  title = &quot;Rental prices for flats in the Bay Area&quot;,
+  x = &quot;Year&quot;,
+  y = &quot;Rental Price&quot;,
+  caption = &quot;Source: Pennington. Kate (2018). Bay Area Craigslist Rental Housing Posts 2000-2018&quot;) +
+  theme(legend.position = &quot;None&quot;)</code></pre>
+<p><img src="/blogs/sa_rents_files/figure-html/rental_4-1.png" width="648" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conclusion" class="section level2">
+<h2>Conclusion</h2>
+<blockquote>
+<p>There has been a overall increase in rental prices in the Bay Area between 2000 and 2018. This reflects the tech boom in the Bay Area. In particular, Palo Alto, the birthplace of Sillicon Valley, has experienced the highest rental increase. On the other hand, cities like Santa Rosa and San Jose, have experienced relatively lower rental increase. This increase can probably be accounted for by simple inflation adjustments. Most cities experienced a dip in prices around 2008-2010. We believe this reflects the housing bubble burst of 2008, which triggered a global financial crisis. Before this graphs can be seen to be increasing to a local peak when cheap credit and tax lending standards fueled the housing bubble. After 2010, the government bailouts helped the market recover and restart the economy, giving us an increasing trend in housing prices.</p>
+</blockquote>
+</div>

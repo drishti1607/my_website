@@ -3,7 +3,9 @@ title: "Climate Analysis"
 author: "Drishti Hoskote"
 date: "2022-09-18"
 output: html_document
+slug: climate_analysis
 ---
+
 ```{r, setup, include=FALSE}
 knitr::opts_chunk$set(
   message = FALSE, 
