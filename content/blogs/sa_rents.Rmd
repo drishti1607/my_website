@@ -1,10 +1,13 @@
 ---
-title: "Bay Area Rents"
-author: "Drishti Hoskote"
-date: "2022-09-18"
-output: html_document
-slug: sa_rents
-image: pic05.jpg
+categories:  
+- ""    #the front matter should be like the one found in, e.g., blog2.md. It cannot be like the normal Rmd we used
+- ""
+date: "2021-09-30"
+description: Analysis of rent prices in the Bay Area 
+draft: false
+image: pic05.jpg 
+keywords: ""
+slug: sa_rents # slug is the shorthand URL address... no spaces plz
 title: Rents in the Bay Area
 ---
 
