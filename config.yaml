@@ -8,9 +8,8 @@ params:
   banner:
     buttonText: Get Started
     subtitle: |-
-      A RESPONSIVE SITE TEMPLATE DESIGNED BY HTML5 UP
-      AND RELEASED UNDER THE CREATIVE COMMONS.
-    title: Hi, my name is Drishti Hoskote
+      Welcome to my portfolio! Learn more about me and the projects I've worked on :)
+    title: Hi, I'm Drishti!
   blog: {}
   contact:
     address:
@@ -76,34 +75,34 @@ params:
       - name: Elements
         url: elements.html
     menu: Menu
-    subtitle: By HTML5 Up
-    title: Forty
+    subtitle: Drishti Hoskote
+    title: Portfolio Website
   tiles:
     enable: yes
     showcase:
-      - image: IMG_2059.jpg
+      - image: IMG_2059.JPG
         subtitle: Ipsum Dolor Sit Amet
         title: About Me
         url: blogs/aliquam
       - image: pic02.jpg
         subtitle: Feugiat Amet Tempus
-        title: Tempus
+        title: Read my CV
         url: blogs/tempus
       - image: pic03.jpg
         subtitle: Lorem Etiam Nullam
-        title: Magna
+        title: Brexit Analysis
         url: blogs/magna
       - image: pic04.jpg
         subtitle: Nisl Sed Aliquam
-        title: Ipsum
+        title: Climate and Temperature Change Analysis
         url: blogs/ipsum
       - image: pic05.jpg
         subtitle: Ipsum Dolor Sit Amet
-        title: Consequat
+        title: Analysis of Rents in the Bay Area
         url: blogs/ipsum
       - image: pic06.jpg
         subtitle: Feugiat Amet Tempus
-        title: Etiam
+        title: Visit the Seven Sisters with me
         url: blogs/ipsum
   two:
     buttonText: Get Started
