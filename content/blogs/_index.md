@@ -1,14 +1,7 @@
 ---
-categories:  
-- ""    #the front matter should be like the one found in, e.g., blog2.md. It cannot be like the normal Rmd we used
-- ""
-date: "2021-09-30"
-description: Analysis of rent prices in the Bay Area 
+date: "2017-10-31T22:27:21-05:00"
 draft: false
-image: pic06.jpg 
-keywords: ""
-slug: resume # slug is the shorthand URL address... no spaces plz
-title: Resume
+image: pic02.jpg
+slug: blogs
+title: Projects
 ---
-
-
