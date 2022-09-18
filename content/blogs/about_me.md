@@ -5,7 +5,7 @@ categories:
 date: "2017-10-31T22:42:51-05:00"
 description: hello
 draft: false
-image: IMG_4458.jpeg
+image: IMG_4458.jpeg?nf_resize=fit&w=300&h=100
 keywords: ""
 slug: about_me
 title: About me 
