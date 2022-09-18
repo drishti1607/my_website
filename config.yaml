@@ -23,9 +23,9 @@ params:
       - email: dhoskote.mam2023@london.edu
         title: Email
     enable: yes
-    #phone:
-      #- phone: (000) 000-0000 x1234
-       # title: Phone
+    phone:
+      - phone: +44 7379783719
+        title: Phone
   custom_css: []
   custom_js: []
   description: Your description
@@ -68,12 +68,10 @@ params:
     links:
       - name: Home
         url: '#'
+      - name: About Me
+        url: blogs/about_me
       - name: Blogs
         url: blogs
-      - name: Generic Blog
-        url: blogs/ipsum
-      - name: Elements
-        url: elements.html
     menu: Menu
     subtitle: Drishti Hoskote
     title: Portfolio Website
@@ -100,18 +98,9 @@ params:
         subtitle: Analysis of trends in rents in the Bay Area
         title: Rents in the Bay Area
         url: blogs/sa_rents
-      - image: pic06.jpg
-        subtitle: Feugiat Amet Tempus
-        title: Visit the Seven Sisters with me
-        url: blogs/ipsum
   two:
-    buttonText: Get Started
+    buttonText: Projects
     enable: yes
-    subtitle: "Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero.
-      \n    Mauris aliquet magna magna sed nunc rhoncus pharetra. \n    Pellentesque
-      condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia
-      pellentesque lorem ipsum dolor. \n    Nullam et orci eu lorem consequat tincidunt.
-      Vivamus et sagittis libero.\n    Mauris aliquet magna magna sed nunc rhoncus
-      amet pharetra et feugiat tempus."
-    title: Massa libero
+    subtitle: "Consulting | Product Management | Fintech | Phsychology"
+    title: Areas of Interest
     url: blogs
