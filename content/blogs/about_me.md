@@ -3,7 +3,7 @@ categories:
 - ""
 - ""
 date: "2017-10-31T22:42:51-05:00"
-description: hello
+description: I love ideating, executing those ideas, and watching them come to life.
 draft: false
 image: IMG_9527.jpg
 keywords: ""

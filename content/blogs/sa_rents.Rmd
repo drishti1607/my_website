@@ -4,6 +4,8 @@ author: "Drishti Hoskote"
 date: "2022-09-18"
 output: html_document
 slug: sa_rents
+image: pic05.jpg
+title: Rents in the Bay Area
 ---
 
 ```{r, setup, echo=FALSE}
