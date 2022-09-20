@@ -73,8 +73,8 @@ params:
       - name: Blogs
         url: blogs
     menu: Menu
-    subtitle: Drishti Hoskote
-    title: Portfolio Website
+    subtitle: Portfolio Website
+    title: Drishti Hoskote
   tiles:
     enable: yes
     showcase:
