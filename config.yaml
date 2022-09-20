@@ -98,6 +98,10 @@ params:
         subtitle: Analysis of trends in rents in the Bay Area
         title: Rents in the Bay Area
         url: blogs/sa_rents
+      - image: pic06.jpg
+        subtitle: Analysis of Biden's Approval Ratings
+        title: US Elections Approval Margins
+        url: blogs/biden_approval_rating
   two:
     buttonText: Projects
     enable: yes
